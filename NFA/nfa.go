@@ -70,10 +70,23 @@ func poregtonfa(pofix string) *nfa {
 
 		}
 	}
+	if len(nfastack) != 1 {
+		fmt.Println("Shoudl count 1 Thing", len(nfastack), nfastack)
+	}
+
 	return nfastack[0]
+}
+
+func pofixMatch(pofix string, inpustring string) bool {
+	isMatched := false
+	poregtonfa := poregtonfa(pofix)
+
+	return isMatched
 }
 
 func main() {
 	nfa := poregtonfa("ab.c*|")
 	fmt.Println(nfa)
+
+	fmt.Println(pofixMatch("ab.c*|", "cccc"))
 }
