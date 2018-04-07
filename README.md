@@ -4,7 +4,7 @@ This is a program written in Go language that can build a non-deterministic ﬁn
 # what is ndfa?
 In NDFA, for a particular input symbol, the machine can move to any combination of the states in the machine. In other words, the exact state to which the machine moves cannot be determined. Hence, it is called Non-deterministic Automaton. As it has finite number of states, the machine is called Non-deterministic Finite Machine or Non-deterministic Finite Automaton.
 
-#Formal Definition of an NDFA
+# Formal Definition of an NDFA
 An NDFA can be represented by a 5-tuple (Q, ∑, δ, q0, F) where −
 
 Q is a finite set of states.
