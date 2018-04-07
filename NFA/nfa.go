@@ -1,7 +1,9 @@
 package main
 
 import (
+	"bufio"
 	"fmt"
+	"os"
 )
 
 type state struct {
@@ -120,8 +122,22 @@ func pomatchfix(pox string, s string) bool { //find out if pofix regexp matches 
 }
 
 func main() {
-	nfa := poregtonfa("ab.c*|")
-	fmt.Println(nfa)
+	scanner := bufio.NewScanner(os.Stdin)
 
-	fmt.Println(pofixMatch("ab.c*|", "cccc"))
+	fmt.Println("---User Input---")
+
+	fmt.Println("Enter Regrex Expration :")
+	scanner.Scan()
+	regExpUserInput := scanner.Text()
+
+	fmt.Println("Enter String to check against :")
+	scanner.Scan()
+	stringUserInput := scanner.Text()
+
+	pofixUserRegexp := (poregtonfa(regExpUserInput))
+
+	fmt.Println("Infix :  ", regExpUserInput)
+	fmt.Println("Postfix : ", pofixUserRegexp)
+
+	fmt.Println("Match : ", (pomatchfix(pofixUserRegexp, stringUserInput)))
 }
