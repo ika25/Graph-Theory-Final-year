@@ -77,11 +77,46 @@ func poregtonfa(pofix string) *nfa {
 	return nfastack[0]
 }
 
-func pofixMatch(pofix string, inpustring string) bool {
-	isMatched := false
-	poregtonfa := poregtonfa(pofix)
+func addState(list []*state, single *state, accept *state) []*state { //list of pointers to states, single pointer to a state and accept state
+	list = append(list, single)
+	// Any state that has the rune value 0 then the state has empty arrows coming from it.
+	if single != accept && single.symbol == 0 {
+		list = addState(list, single.edge1, accept)
+		if single.edge2 != nil {
+			list = addState(list, single.edge2, aaccept)
+		}
 
-	return isMatched
+	}
+
+	return list
+}
+
+func pomatchfix(pox string, s string) bool { //find out if pofix regexp matches the string
+	ismatch := false
+	pofnfa := poregtonfa(pox)
+
+	current := []*state{} //array of pointers to state. List of states that we are currently in on NFA
+	next := []*state{}    // states we can get to
+
+	current = addState(current[:], pofnfa.initial, pofnfa.accept) //pass current state, pass initial state and accept state. [:] is slice, for when you pass an array and want to change it
+
+	for _, r := range s { //r is rune. loop through s a character at a time
+		for _, c := range current { //c is current state we are in. loop through the current states
+			if c.symbol == r { // if the sybmol is the same as the one currently reading from s
+				next = addState(next[:], c.edge1, pofnfa.accept)
+			}
+		}
+		current, next = next, []*state{} //move current states to next states. Next array made blank
+	}
+
+	for _, c := range current { //loop through the state that you end up in at the very end
+		if c == pofnfa.accept {
+			ismatch = true
+			break // from this point is match will always be true
+		}
+	}
+
+	return ismatch
 }
 
 func main() {
