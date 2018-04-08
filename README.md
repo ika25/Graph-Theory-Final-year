@@ -1,6 +1,13 @@
 # Graph-Theory-Final-year
 This is a program written in Go language that can build a non-deterministic ﬁnite automaton (NDFA) from a regular expression, and can use the NFA to check if the regular expression matches any given string of text.
 
+# How to run program:
+1)Install Go Lang in your PC
+
+2)Install GO Programming in VS code: https://code.visualstudio.com/docs/languages/go
+
+3)Start Deuging in VS code and that should run your project.
+
 # what is ndfa?
 In NDFA, for a particular input symbol, the machine can move to any combination of the states in the machine. In other words, the exact state to which the machine moves cannot be determined. Hence, it is called Non-deterministic Automaton. As it has finite number of states, the machine is called Non-deterministic Finite Machine or Non-deterministic Finite Automaton.
 
